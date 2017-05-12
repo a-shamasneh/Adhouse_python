@@ -15,8 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-
+from django.views.generic import TemplateView
+from Adhouse import views
 urlpatterns = [
+    url(r'^$', views.index, name='home'),
+    # The new URL entries we're adding:
+    url(r'^signup/$',
+        TemplateView.as_view(template_name='signup.html'),
+        name='signup'),
+    url(r'^signin/$', 
+        TemplateView.as_view(template_name='signin.html'),
+        name='signin'),
+
     url(r'^admin/', admin.site.urls),
-    url(r'^home/', include('Adhouse.urls')),
 ]

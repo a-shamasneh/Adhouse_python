@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+    signup - {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    <h1>Signup page</h1>
+    <p>Signup content.</p>
+    <form id="CompanyForm" method="post" action="/widgets/Add_store/">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+            <input type="submit" name="submit" value="Create New Store " />
+        </form>
+{% endblock content %}
