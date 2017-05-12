@@ -19,16 +19,15 @@ from django.views.generic import TemplateView
 from Adhouse import views
 urlpatterns = [
     url(r'^$', views.index, name='home'),
+    url(r'^Add/', include('Adhouse.urls')),
     # The new URL entries we're adding:
-    url(r'^signup/$',
-        TemplateView.as_view(template_name='signup.html'),
-        name='signup'),
-    url(r'^signin/$', 
-        TemplateView.as_view(template_name='signin.html'),
-        name='signin'),
+   
     url(r'^things/(?P<id>[-\w]+)/$', views.thing_detail, 
         name='thing_detail'),
     url(r'^things/(?P<id>[-\w]+)/edit/$', views.editadv,
     	name='editadv'), 
+    url(r'^accounts/', 
+        include('registration.backends.simple.urls')),
+
     url(r'^admin/', admin.site.urls),
 ]

@@ -1,21 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.shortcuts import render,redirect
 from Adhouse.models import Advs
 # Create your views here.
 from forms import ThingForm
+from forms import AdvForm
+# to get current user id 
 
 
-#def index(request):
-    #return HttpResponse("Hello, world. You're at the polls index.")
-    #user=User.objects.create(
-    	#email="pedro.kong@company.com",
-    	#first_name="Pedro",
-    	#last_name="Kong"
 
-    	#)
-    #user.save()
 
 def index(request):
     things = Advs.objects.all()
@@ -59,5 +52,34 @@ def editadv(request, id):
         'thing': thing,
         'form': form,
     })
+#the function executes with the signup url to take the inputs 
+def Add(request):
+    if request.method == 'POST':  # if the form has been filled
 
-    
+        form = AdvForm(request.POST)
+
+        if form.is_valid():  # All the data is valid
+            name = request.POST.get('name', '')
+            description = request.POST.get('description', '')
+            phone = request.POST.get('phone', '')
+            cat = request.POST.get('cat', '')
+            img = request.POST.get('img', '')
+            userid=request.POST.get('userid', '')
+
+        # creating an user object containing all the data
+        ok = Advs(name=name, description=description, phone=phone,cat=cat,img=img,user_id=userid)
+        # saving all the data in the current object into the database
+        ok.save()
+        things = Advs.objects.all()
+        return render(request, 'index.html', {'things': things,'is_registered':True }) # Redirect after POST
+
+    else:
+        form = AdvForm()  # an unboundform
+
+        return render(request, 'create_thing.html', {'form': form})
+
+#the function executes with the showdata url to display the list of registered users
+#the function executes with the showdata url to display the list of registered users
+def showdata(request):
+    things = Advs.objects.all()
+    return render(request, 'index.html', {'things': things, })
