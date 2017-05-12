@@ -26,6 +26,9 @@ urlpatterns = [
     url(r'^signin/$', 
         TemplateView.as_view(template_name='signin.html'),
         name='signin'),
-
+    url(r'^things/(?P<id>[-\w]+)/$', views.thing_detail, 
+        name='thing_detail'),
+    url(r'^things/(?P<id>[-\w]+)/edit/$', views.editadv,
+    	name='editadv'), 
     url(r'^admin/', admin.site.urls),
 ]

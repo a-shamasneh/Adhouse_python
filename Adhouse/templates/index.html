@@ -4,7 +4,13 @@
 {% endblock title %}
 
 {% block content %}
-    <h1>Hello World!</h1>
-    <p>I am a basic website.</p>
-    <p>{% if number %}Number exists!{{number}}{% endif %}</p>
+    {% for thing in things %}
+    <h2>
+        <a href="{% url 'thing_detail' id=thing.id %}">
+            {{ thing.name }}
+        </a>
+        {{ thing.id }}
+    </h2>
+    <p>{{ thing.description }}</p>
+    {% endfor %}
 {% endblock content %}

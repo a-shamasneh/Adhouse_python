@@ -2,12 +2,16 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.forms import ModelForm
-from mongoengine import *
-# Create your models here.
-class User(models.Model):
-    
-    u_name = StringField(max_length=50)
-    u_pass = StringField(max_length=50)
-    u_email= StringField(required=True)
+
+class Advs(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    phone = models.CharField(max_length=255)
+    cat = models.CharField(max_length=255)
+    img = models.CharField(max_length=255)
+    date = models.DateTimeField(auto_now_add=True, blank=True)
+
+
+
+
     
