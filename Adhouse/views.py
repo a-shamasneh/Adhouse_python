@@ -52,7 +52,7 @@ def editadv(request, id):
         'thing': thing,
         'form': form,
     })
-#the function executes with the signup url to take the inputs 
+ 
 def Add(request):
     if request.method == 'POST':  # if the form has been filled
 
